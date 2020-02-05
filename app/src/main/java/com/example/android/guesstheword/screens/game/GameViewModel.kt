@@ -41,6 +41,13 @@ class GameViewModel : ViewModel() {
         DateUtils.formatElapsedTime(time)
     }
 
+    // Hint for the current word
+    val wordHint = Transformations.map(word) { word ->
+        val randomPosition = (1..word.length).random()
+        "Current word has ${word.length} letters\nThe letter at position ${randomPosition} is " +
+                "\"${word.get(randomPosition - 1).toUpperCase()}\""
+    }
+
     // Event which triggers the end of the game
     private val _eventGameFinish = MutableLiveData<Boolean>()
     val eventGameFinish: LiveData<Boolean>
